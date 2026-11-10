@@ -1234,7 +1234,10 @@ public abstract class Accessor {
             return false;
         }
 
-        public void setExactGeneratedProxyEntries(@SuppressWarnings("unused") Method[] entries) {
+        public void setExactGeneratedProxyEntries(Method[] entries) {
+            if (entries.length != 0) {
+                throw CompilerDirectives.shouldNotReachHere("Exact generated proxy entries are not supported by this runtime");
+            }
         }
 
         public abstract RuntimeCallTarget newCallTarget(CallTarget source, RootNode rootNode);
