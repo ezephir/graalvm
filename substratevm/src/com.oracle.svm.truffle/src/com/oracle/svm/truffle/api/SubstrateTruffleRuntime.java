@@ -383,6 +383,7 @@ public final class SubstrateTruffleRuntime extends OptimizedTruffleRuntime {
 
     @Platforms(HOSTED_ONLY.class)
     public Method[] getExactGeneratedProxyEntries() {
+        assert exactGeneratedProxyEntries != null : "Exact generated proxy entries not initialized";
         return exactGeneratedProxyEntries;
     }
 
