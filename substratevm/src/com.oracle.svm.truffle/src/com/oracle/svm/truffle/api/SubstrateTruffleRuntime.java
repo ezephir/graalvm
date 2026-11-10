@@ -121,7 +121,7 @@ public final class SubstrateTruffleRuntime extends OptimizedTruffleRuntime {
     private static final int PRODUCTION_TEAR_DOWN_TIMEOUT = 10_000;
 
     @Platforms(Platform.HOSTED_ONLY.class) private KnownMethods hostedCallMethods;
-    @Platforms(HOSTED_ONLY.class) private Method[] exactGeneratedProxyEntries = new Method[0];
+    @Platforms(HOSTED_ONLY.class) private Method[] exactGeneratedProxyEntries;
     private volatile BackgroundCompileQueue compileQueue;
     private volatile boolean initialized;
     private volatile Boolean profilingEnabled;
@@ -365,7 +365,7 @@ public final class SubstrateTruffleRuntime extends OptimizedTruffleRuntime {
     @Platforms(HOSTED_ONLY.class)
     public void resetNativeImageState() {
         clearState();
-        exactGeneratedProxyEntries = new Method[0];
+        exactGeneratedProxyEntries = null;
     }
 
     @Override
@@ -376,7 +376,8 @@ public final class SubstrateTruffleRuntime extends OptimizedTruffleRuntime {
 
     @Override
     @Platforms(HOSTED_ONLY.class)
-    protected void registerExactGeneratedProxyEntries(Method[] entries) {
+    protected void setExactGeneratedProxyEntries(Method[] entries) {
+        assert exactGeneratedProxyEntries == null : "Exact generated proxy entries already initialized";
         exactGeneratedProxyEntries = entries;
     }
 

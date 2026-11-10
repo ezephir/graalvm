@@ -89,8 +89,8 @@ final class OptimizedRuntimeSupport extends RuntimeSupport {
     }
 
     @Override
-    public void registerExactGeneratedProxyEntries(Method[] entries) {
-        OptimizedTruffleRuntime.getRuntime().registerExactGeneratedProxyEntries(entries);
+    public void setExactGeneratedProxyEntries(Method[] entries) {
+        OptimizedTruffleRuntime.getRuntime().setExactGeneratedProxyEntries(entries);
     }
 
     @Override

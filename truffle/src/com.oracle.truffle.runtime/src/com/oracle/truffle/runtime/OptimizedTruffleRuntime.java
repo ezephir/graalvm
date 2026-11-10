@@ -882,7 +882,7 @@ public abstract class OptimizedTruffleRuntime implements TruffleRuntime, Truffle
         return false;
     }
 
-    protected void registerExactGeneratedProxyEntries(@SuppressWarnings("unused") Method[] entries) {
+    protected void setExactGeneratedProxyEntries(@SuppressWarnings("unused") Method[] entries) {
     }
 
     @SuppressWarnings("unused")

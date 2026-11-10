@@ -84,7 +84,7 @@ final class PolyglotProxyFeature implements Feature {
         }
         proxies = generatedProxies;
         exactEntryMethods = generatedExactEntries.toArray(Method[]::new);
-        EngineAccessor.RUNTIME.registerExactGeneratedProxyEntries(exactEntryMethods);
+        EngineAccessor.RUNTIME.setExactGeneratedProxyEntries(exactEntryMethods);
     }
 
     @Override

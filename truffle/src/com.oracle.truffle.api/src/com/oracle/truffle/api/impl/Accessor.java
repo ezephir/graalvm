@@ -1234,7 +1234,7 @@ public abstract class Accessor {
             return false;
         }
 
-        public void registerExactGeneratedProxyEntries(@SuppressWarnings("unused") Method[] entries) {
+        public void setExactGeneratedProxyEntries(@SuppressWarnings("unused") Method[] entries) {
         }
 
         public abstract RuntimeCallTarget newCallTarget(CallTarget source, RootNode rootNode);
