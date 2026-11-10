@@ -883,6 +883,7 @@ public abstract class OptimizedTruffleRuntime implements TruffleRuntime, Truffle
     }
 
     protected void setExactGeneratedProxyEntries(@SuppressWarnings("unused") Method[] entries) {
+        throw CompilerDirectives.shouldNotReachHere("Exact generated proxy entries are not supported by this runtime");
     }
 
     @SuppressWarnings("unused")
