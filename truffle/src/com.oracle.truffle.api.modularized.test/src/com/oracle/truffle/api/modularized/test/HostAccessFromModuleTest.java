@@ -86,7 +86,7 @@ public class HostAccessFromModuleTest {
     static final String TEST_REPLACE_CLASS_NAME = "HostClassLoadingTestClazz1";
     private static final String TEST_REPLACE_QUALIFIED_CLASS_NAME = HostClassLoadingTestClass1.class.getPackage().getName() + ".HostClassLoadingTestClazz1";
 
-    @Value.Optimized
+    @HostAccess.Optimized
     @HostAccess.Implementable
     public interface GeneratedFunction {
         int apply(int value);

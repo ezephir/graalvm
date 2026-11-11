@@ -41,6 +41,7 @@
 package org.graalvm.polyglot;
 
 import java.lang.annotation.Annotation;
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -749,6 +750,43 @@ public final class HostAccess {
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.TYPE})
     public @interface Implementable {
+    }
+
+    /**
+     * Requests an implementation optimized for invocation speed when converting a guest value to
+     * this interface with {@link Value#as(Class)}. Use this annotation for interfaces whose methods
+     * are called frequently from Java.
+     * <p>
+     * Interfaces may declare multiple methods. In Native Image, annotated interfaces included in
+     * the image are available for conversion without additional proxy configuration.
+     *
+     * <pre>{@code
+     * @HostAccess.Optimized
+     * @FunctionalInterface
+     * public interface Adder {
+     *     int add(int left, int right);
+     * }
+     *
+     * try (Context context = Context.newBuilder("js")
+     *                 .allowHostAccess(HostAccess.EXPLICIT)
+     *                 .build()) {
+     *     Adder adder = context.eval("js", "(x, y) => x + y").as(Adder.class);
+     *     assert adder.add(40, 2) == 42;
+     * }
+     * }</pre>
+     * <p>
+     * This annotation does not authorize host access. Conversion remains subject to the configured
+     * {@link HostAccess} policy. It also does not guarantee allocation-free conversion or
+     * invocation. Only non-sealed interfaces are currently supported. The interface and reference
+     * types in its method signatures must be public and their packages must be exported to unnamed
+     * modules.
+     *
+     * @since 25.6
+     */
+    @Documented
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.TYPE)
+    public @interface Optimized {
     }
 
     /**

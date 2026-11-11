@@ -57,7 +57,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import org.graalvm.polyglot.Value.Optimized;
+import org.graalvm.polyglot.HostAccess.Optimized;
 
 import com.oracle.truffle.api.CallTarget;
 import com.oracle.truffle.api.CompilerDirectives.TruffleBoundary;
@@ -248,7 +248,7 @@ final class PolyglotProxyClass {
             return constructor.newInstance(languageContext, receiver, languageContext.context.getContextAPI(),
                             equalsTarget, hashCodeTarget, toStringTarget, targets);
         } catch (ReflectiveOperationException | SecurityException | LinkageError e) {
-            throw PolyglotEngineException.unsupported("Cannot instantiate @Value.Optimized implementation for " + interfaceType.getTypeName(), e);
+            throw PolyglotEngineException.unsupported("Cannot instantiate @HostAccess.Optimized implementation for " + interfaceType.getTypeName(), e);
         }
     }
 
@@ -302,8 +302,8 @@ final class PolyglotProxyClass {
 
     private static void requireSupportedInterface(Class<?> type) {
         if (type == null || !type.isInterface() || !Modifier.isPublic(type.getModifiers()) || type.isSealed() || !type.isAnnotationPresent(Optimized.class)) {
-            throw new IllegalArgumentException("Unsupported @Value.Optimized interface " + (type == null ? "null" : type.getTypeName()) +
-                            ": expected a public, non-sealed interface annotated with @Value.Optimized");
+            throw new IllegalArgumentException("Unsupported @HostAccess.Optimized interface " + (type == null ? "null" : type.getTypeName()) +
+                            ": expected a public, non-sealed interface annotated with @HostAccess.Optimized");
         }
     }
 
@@ -314,11 +314,11 @@ final class PolyglotProxyClass {
         }
         if (!type.isPrimitive()) {
             if (!Modifier.isPublic(type.getModifiers())) {
-                throw new IllegalArgumentException("Unsupported @Value.Optimized signature type " + signatureType.getTypeName() + " in " + location + ": type must be public");
+                throw new IllegalArgumentException("Unsupported @HostAccess.Optimized signature type " + signatureType.getTypeName() + " in " + location + ": type must be public");
             }
             Module module = type.getModule();
             if (!module.isExported(type.getPackageName(), proxyModule)) {
-                throw new IllegalArgumentException("Unsupported @Value.Optimized signature type " + signatureType.getTypeName() + " in " + location +
+                throw new IllegalArgumentException("Unsupported @HostAccess.Optimized signature type " + signatureType.getTypeName() + " in " + location +
                                 ": package must be exported to generated proxies in unnamed modules, even when Truffle runs as a named module. " +
                                 "Add 'exports " + type.getPackageName() + ";' to module-info.java or use --add-exports=" + module.getName() + "/" + type.getPackageName() + "=ALL-UNNAMED");
             }
@@ -358,7 +358,7 @@ final class PolyglotProxyClass {
     }
 
     private static UnsupportedOperationException unsupported(Class<?> type, Throwable cause) {
-        return new UnsupportedOperationException("Cannot generate @Value.Optimized implementation for " + type.getTypeName() + ": " + cause.getMessage(), cause);
+        return new UnsupportedOperationException("Cannot generate @HostAccess.Optimized implementation for " + type.getTypeName() + ": " + cause.getMessage(), cause);
     }
 
     private record ObjectMethodTargets(CallTarget equalsTarget, CallTarget hashCodeTarget, CallTarget toStringTarget) {

@@ -50,10 +50,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import org.graalvm.polyglot.HostAccess.Optimized;
 import org.graalvm.polyglot.PolyglotException;
 import org.graalvm.polyglot.PolyglotException.StackFrame;
 import org.graalvm.polyglot.Value;
-import org.graalvm.polyglot.Value.Optimized;
 import org.graalvm.polyglot.proxy.ProxyExecutable;
 import org.graalvm.polyglot.proxy.ProxyObject;
 import org.junit.Assert;

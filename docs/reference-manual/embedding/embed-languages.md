@@ -848,7 +848,7 @@ Now, you can add `reachability-metadata.json` to `META-INF/native-image/<group-i
 
 ### Generating Guest-to-Java Interface Proxies
 
-Use `@Value.Optimized` for fast access to guest object members or execution of guest functions through a Java interface.
+Use `@HostAccess.Optimized` for fast access to guest object members or execution of guest functions through a Java interface.
 This is the recommended approach for performance-sensitive interface calls.
 Annotate a public, non-sealed interface and convert the guest value with `Value.as`:
 
@@ -856,7 +856,7 @@ Annotate a public, non-sealed interface and convert the guest value with `Value.
 import org.graalvm.polyglot.HostAccess;
 import org.graalvm.polyglot.Value;
 
-@Value.Optimized
+@HostAccess.Optimized
 @HostAccess.Implementable
 public interface Arithmetic {
     double add(int left, int right);

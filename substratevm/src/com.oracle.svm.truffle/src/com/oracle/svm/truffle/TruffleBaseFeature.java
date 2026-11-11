@@ -78,7 +78,7 @@ import com.oracle.svm.util.JVMCIRuntimeClassInitializationSupport;
 import org.graalvm.nativeimage.hosted.RuntimeReflection;
 import org.graalvm.nativeimage.hosted.RuntimeResourceAccess;
 import org.graalvm.polyglot.Engine;
-import org.graalvm.polyglot.Value.Optimized;
+import org.graalvm.polyglot.HostAccess.Optimized;
 
 import com.oracle.graal.pointsto.meta.AnalysisMetaAccess;
 import com.oracle.graal.pointsto.meta.AnalysisType;
@@ -569,7 +569,7 @@ public final class TruffleBaseFeature implements InternalFeature {
             VMError.shouldNotReachHere("TruffleFeature is required for SubstrateTruffleRuntime.");
         }
         /*
-         * Guest features cannot enumerate image classes, so discover @Value.Optimized interfaces in
+         * Guest features cannot enumerate image classes, so discover @HostAccess.Optimized interfaces in
          * this builder feature and pass them to the guest-owned PolyglotProxyFeature.
          */
         Class<?>[] proxyInterfaces = access.getImageClassLoader().findAnnotatedClasses(Optimized.class, false).toArray(Class<?>[]::new);

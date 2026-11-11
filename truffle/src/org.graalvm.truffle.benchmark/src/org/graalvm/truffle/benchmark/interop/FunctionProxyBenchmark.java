@@ -44,8 +44,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.HostAccess;
+import org.graalvm.polyglot.HostAccess.Optimized;
 import org.graalvm.polyglot.Value;
-import org.graalvm.polyglot.Value.Optimized;
 import org.graalvm.truffle.benchmark.TruffleBenchmark;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;

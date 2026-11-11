@@ -27,7 +27,7 @@ package jdk.graal.compiler.truffle.test;
 
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.HostAccess;
-import org.graalvm.polyglot.Value.Optimized;
+import org.graalvm.polyglot.HostAccess.Optimized;
 import org.junit.Assert;
 import org.junit.Test;
 
