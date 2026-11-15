@@ -1,0 +1,18 @@
+enableFeaturePreview('TYPESAFE_PROJECT_ACCESSORS')
+
+rootProject.name = 'graal'
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
+def includeDotted = { String folderPath ->
+    def logicalPath = ':' + folderPath.replace('/', ':').replace('.', '-')
+    include logicalPath
+    project(logicalPath).projectDir = file(folderPath)
+}
+
+includeDotted('sdk/src/org.graalvm.word')
+includeBuild('gradle-plugins/java-convention')
